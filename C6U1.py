@@ -1,5 +1,6 @@
 
-s=[["2x+3y=24a+8b+2"],["12c+2b=3a+3"],["5x+5z+13c=4"]]
+s=[["4x+3t=5q+o+j+40"],["4x+4z+2j=3q+4e+4t+2o+20"],["2t+9=5q+e+z+4o+3j"],["x+2e+2t+3z+o+4j=51"],["4q+73=5x+2e+3t+4o+3j"],["q+3z+2o+3j+19=5x+2e+t"],["2z+3j+1=3x+3q+2e+5o]"]]
+
 #s je testovací input
 pocetRovnic=len(s)
 listNeznamych = []
