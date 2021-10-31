@@ -1,3 +1,4 @@
+import numpy as np
 
 s=[["4x+3t=5q+o+j+40"],["4x+4z+2j=3q+4e+4t+2o+20"],["2t+9=5q+e+z+4o+3j"],["x+2e+2t+3z+o+4j=51"],["4q+73=5x+2e+3t+4o+3j"],["q+3z+2o+3j+19=5x+2e+t"],["2z+3j+1=3x+3q+2e+5o"]]
 #ošetřit proti neznámým typu "1*q"
@@ -93,6 +94,9 @@ matice = strint(matice)
 listPravychStran = strint(listPravychStran)
 print(listPravychStran)
 
+A = np.array(matice)
+B = np.array(listPravychStran)
+
 for i in range(len(s)):
     print(s[i])
 print("listNeznamych:",listNeznamych)
@@ -100,3 +104,16 @@ print("listNeznamych:",listNeznamych)
 print("matice")
 for i in range(len(matice)):
     print(matice[i],listPravychStran[i])
+
+x = np.linalg.solve(A,B)
+
+for i in range(len(x)):
+    if -0.1<x[i] and x[i]<0.1:
+        x[i] = 0
+
+result = []
+for i in range(len(x)):
+    result.append(int(round(x[i][0])))
+
+for i in range(len(result)):
+    print(result[i], end=" ")
