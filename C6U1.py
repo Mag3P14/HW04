@@ -11,6 +11,13 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
 found = 0
 k = 0
 
+#převod string -> int
+def strint(list):
+    l = list
+    list = [[int(i) for i in list]for list in l]
+    l.clear
+    return list
+
 # rovnaSeSplit rozdělení přes znak "="
 def formatovaniRovnice(s):
     rovnaSeSplit=s.split("=") 
@@ -63,6 +70,7 @@ for i in range(len(listLevychStran)):
     for inzn in range(pocetNeznamych):
         for j in range(len(listLevychStran[i])):
             if listNeznamych[inzn] in listLevychStran[i][j]:
+                listLevychStran[i][j] = listLevychStran[i][j][:-1]
                 matice[k].append(listLevychStran[i][j])
                 matice
                 found = True
@@ -72,7 +80,6 @@ for i in range(len(listLevychStran)):
             found = False
     k+=1
 
-maticep = map(int,listPravychStran)
+print(strint(matice))
+print(strint(listPravychStran))
 
-print(matice)
-print(maticep)
