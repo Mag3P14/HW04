@@ -1,11 +1,11 @@
-import numpy as np
 import sys
-s=[]
 
-for line in sys.stdin:
-    s.append([line.rstrip()])
+#s=[]
+#for line in sys.stdin:
+#    s.append([line.rstrip()])
 
-#s=[["4x+3t=5q+o+j+40"],["4x+4z+2j=3q+4e+4t+2o+20"],["2t+9=5q+e+z+4o+3j"],["x+2e+2t+3z+o+4j=51"],["4q+73=5x+2e+3t+4o+3j"],["q+3z+2o+3j+19=5x+2e+t"],["2z+3j+1=3x+3q+2e+5o"]]
+s=[["4x+3t=5q+o+j+40"],["4x+4z+2j=3q+4e+4t+2o+20"],["2t+9=5q+e+z+4o+3j"],["x+2e+2t+3z+o+4j=51"],["4q+73=5x+2e+3t+4o+3j"],["q+3z+2o+3j+19=5x+2e+t"],["2z+3j+1=3x+3q+2e+5o"]]
+#s=[["2g+12=4v"],["3v=g+10"]]
 
 pocetRovnic=len(s)
 listNeznamych = []
@@ -18,7 +18,12 @@ found = 0
 k = 0
 
 #převod string -> int
-def strint(list):
+def strfloat(list):
+    l = list
+    list = [[float(i) for i in list]for list in l]
+    return list
+
+def listint(list):
     l = list
     list = [[int(i) for i in list]for list in l]
     return list
@@ -94,22 +99,40 @@ for i in range(len(listLevychStran)):
             found = False
     k+=1
 
-matice = strint(matice)
-listPravychStran = strint(listPravychStran)
+ls = strfloat(matice)
+ps = strfloat(listPravychStran)
 
-A = np.array(matice)
-B = np.array(listPravychStran)
-x = np.linalg.solve(A,B)
-print()
+def pmatice():
+    for i in range(len(ls)):
+        print(ls[i],end='')
+        print(ps[i])
+    print("")
 
-for i in range(len(x)):
-    if -0.1<x[i] and x[i]<0.1:
-        x[i] = 0
+##Gauss##
 
-result = []
-for i in range(len(x)):
-    result.append(int(round(x[i][0])))
+x=0
+y=0
 
-for i in range(len(result)):
-    print(result[i], end=" ")
+for j in range(len(ls)-1):
+    for i in range(x,len(ls)-1):
+        #ls[i][j]
+        while ls[x][y]==0:
+            ls[x],ls[-1]=ls[-1],ls[x] #line
+            ps[x],ps[-1]=ps[-1],ps[x] #swap
+        pmatice()
+        for q in range(j,len(ls)-1):
+            k=((-1)*(ls[i+1][j]))/(ls[x][y])
+            print(k)
+            for q in range(j,len(ls)):
+                ls[i+1][q] = ls[i+1][q]+(k)*(ls[x][q])
+            ps[i+1][0] = ps[i+1][0]+(k)*(ps[x][0])
+            pmatice()
+    pmatice()
+    x+=1
+    y+=1
 
+
+ls = listint(ls)
+ps = listint(ps)
+
+pmatice()
